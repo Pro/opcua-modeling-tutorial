@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ModelDesign
+  xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ua="http://opcfoundation.org/UA/"
+  xmlns:FooZbrFlt="https://new.foo.com/zebra-compression/flattening-and-subspacefolding/UA/"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  TargetNamespace="https://new.foo.com/zebra-compression/flattening-and-subspacefolding/UA/"
+  TargetVersion="0.9.0"
+  TargetPublicationDate="2020-05-01T00:00:00Z"
+  xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
+
+  <Namespaces>
+    <!--No space allowed at the beginning of the namespace URL!
+      Prefix sets the filenames of the generated files. -->
+    <Namespace Name="FooZbrFlt" Prefix="FooFlt">https://new.foo.com/zebra-compression/flattening-and-subspacefolding/UA/</Namespace>
+    <Namespace Name="OpcUa" Version="1.03" PublicationDate="2013-12-02T00:00:00Z">http://opcfoundation.org/UA/</Namespace>
+  </Namespaces>
+
+  <!-- reading list
+    https://opcua.rocks/address-space/
+    https://opcua.rocks/custom-information-models/
+    https://github.com/Pro/opcua-animal-cs/tree/master/Published/animal
+    https://reference.opcfoundation.org/v104/Core/docs/Part3/A.1/
+    https://reference.opcfoundation.org/v104/Core/docs/Part5/A.1/ -->
+  
+  <!-- ### Reference Types ###-->
+  <!-- OPC UA Standard Part 3
+    A.7 Defining ReferenceTypes
+    Defining new ReferenceTypes should only be done if the predefined ReferenceTypes are not
+    suitable. Whenever a new ReferenceType is defined, the most appropriate ReferenceType
+    should be used as its supertype.
+    It is expected that Servers will have new defined hierarchical ReferenceTypes to expose
+    different hierarchies, and new non-hierarchical References to expose relationships between
+    Nodes in the AddressSpace-->
+
+  <!-- ### Object Types ###-->
+  <ObjectType SymbolicName="FooZbrFlt:ApeType" BaseType="ua:BaseObjectType">
+    <Description>
+      The Automatic Surface Tabulator. It represents a single hardware unit.
+    </Description>
+    <!-- Children may either be defined as part of the type or at instance.
+    Defining children as part of the type should be preferred for strict typing. -->
+    <Children>
+      <Object SymbolicName="FooZbrFlt:Info" ModellingRule="Mandatory" TypeDefinition="FooZbrFlt:InfoType"></Object>
+      <Object SymbolicName="FooZbrFlt:Time" TypeDefinition="FooZbrFlt:TimeType"></Object>
+      <Object SymbolicName="FooZbrFlt:Communication" TypeDefinition="FooZbrFlt:CommunicationType"></Object>
+      <Object SymbolicName="FooZbrFlt:ZebraSystem" TypeDefinition="FooZbrFlt:ZebraSystemType"></Object>
+      <Object SymbolicName="FooZbrFlt:IO" TypeDefinition="FooZbrFlt:IOType"></Object>
+      <Variable SymbolicName="FooZbrFlt:MyVariable" DataType="ua:Double" TypeDefinition="ua:AnalogItemType"></Variable>
+      <Variable SymbolicName="FooZbrFlt:MyVariable2" TypeDefinition="FooZbrFlt:FooAnalogItemType"></Variable>
+      <Variable SymbolicName="FooZbrFlt:MyVariable3" TypeDefinition="ua:AnalogUnitRangeType"></Variable>
+      <Variable SymbolicName="FooZbrFlt:MyVariable4" TypeDefinition="ua:AnalogUnitType"></Variable>
+      <Property SymbolicName="FooZbrFlt:dummyToBeRemoved" DataType="ua:EUInformation"> </Property>
+      <Method SymbolicName="FooZbrFlt:MyMethod" TypeDefinition="FooZbrFlt:MyMethodType"></Method>
+    </Children>
+  </ObjectType>
+
+  <ObjectType SymbolicName="FooZbrFlt:InfoType">
+    <Description>
+      Holds meta information about the APE.
+    </Description>
+    <Children>
+      <Property SymbolicName="FooZbrFlt:Name" DataType="ua:String" ValueRank="Scalar"></Property>
+      <Property SymbolicName="FooZbrFlt:Type" DataType="ua:String" ValueRank="Scalar"></Property>
+      <Property SymbolicName="FooZbrFlt:SWRelease" DataType="ua:String" ValueRank="Scalar"></Property>
+      <Property SymbolicName="FooZbrFlt:SerialNumber" DataType="ua:String" ValueRank="Scalar"></Property>
+      <Object SymbolicName="FooZbrFlt:Location" TypeDefinition="FooZbrFlt:LocationType"></Object>
+    </Children>
+  </ObjectType>
+
+  <ObjectType SymbolicName="FooZbrFlt:LocationType">
+    <Description>
+      Holds time information about the APE.
+    </Description>
+  <Children>
+    <Property SymbolicName="FooZbrFlt:Plant" DataType="ua:String" ValueRank="Scalar"></Property>
+    <Property SymbolicName="FooZbrFlt:Unit" DataType="ua:String" ValueRank="Scalar"></Property>
+  </Children>
+  </ObjectType>
+
+  <ObjectType SymbolicName="FooZbrFlt:TimeType">
+    <Description>
+      Holds time information about the APE.
+    </Description>
+    <Children>
+      <Object SymbolicName="FooZbrFlt:Settings" TypeDefinition="FooZbrFlt:TimeSettingsType"></Object>
+      <Property SymbolicName="FooZbrFlt:ActualTime" DataType="ua:String" ValueRank="Scalar"></Property>
+    </Children>
+  </ObjectType>
+
+    <ObjectType SymbolicName="FooZbrFlt:TimeSettingsType">
+    <Description>
+      Holds time information about the APE.
+    </Description>
+    <Children>
+      <Property SymbolicName="FooZbrFlt:Date" DataType="ua:String" ValueRank="Scalar"></Property>
+      <Property SymbolicName="FooZbrFlt:Time" DataType="ua:String" ValueRank="Scalar"></Property>
+      <Property SymbolicName="FooZbrFlt:TimeZone" DataType="ua:String" ValueRank="Scalar"></Property>
+      <Property SymbolicName="FooZbrFlt:Source" DataType="ua:String" ValueRank="Scalar"></Property>
+      <Object SymbolicName="FooZbrFlt:SNTPServer" TypeDefinition="FooZbrFlt:SNTPServerType"></Object>
+    </Children>
+  </ObjectType>
+  
+  <ObjectType SymbolicName="FooZbrFlt:SNTPServerType">
+    <Children>
+      <Property SymbolicName="FooZbrFlt:Enabled" DataType="ua:String" ValueRank="Scalar"></Property>
+      <Property SymbolicName="FooZbrFlt:IPAddress" DataType="ua:String" ValueRank="Scalar"></Property>
+    </Children>
+  </ObjectType>
+
+  <ObjectType SymbolicName="FooZbrFlt:CommunicationType">
+    <Children>
+      <Object SymbolicName="FooZbrFlt:EthernetInterface" TypeDefinition="FooZbrFlt:EthernetInterfaceType"></Object>
+      <Object SymbolicName="FooZbrFlt:USB" TypeDefinition="FooZbrFlt:USBType"></Object>
+    </Children>
+  </ObjectType>
+
+  <ObjectType SymbolicName="FooZbrFlt:EthernetInterfaceType">
+  </ObjectType>
+
+  <ObjectType SymbolicName="FooZbrFlt:USBType">
+  </ObjectType>
+
+  <ObjectType SymbolicName="FooZbrFlt:ZebraSystemType">
+    <Children>
+      <Object SymbolicName="FooZbrFlt:Configuration" TypeDefinition="FooZbrFlt:ConfigurationType"></Object>
+      <Object SymbolicName="FooZbrFlt:Measurement" TypeDefinition="FooZbrFlt:MeasurementType"></Object>
+    </Children>
+  </ObjectType>
+
+  <ObjectType SymbolicName="FooZbrFlt:ConfigurationType">
+  </ObjectType>
+
+  <ObjectType SymbolicName="FooZbrFlt:MeasurementType">
+  </ObjectType>
+
+  <ObjectType SymbolicName="FooZbrFlt:IOType">
+    <Children>
+      <Object SymbolicName="FooZbrFlt:Configuration" TypeDefinition="FooZbrFlt:ConfigurationType"></Object>
+      <Object SymbolicName="FooZbrFlt:Measurement" TypeDefinition="FooZbrFlt:MeasurementType"></Object>
+    </Children>
+  </ObjectType>
+  
+  <!-- ### Variable Types ###-->
+  <VariableType SymbolicName="FooZbrFlt:FooAnalogItemType" BaseType="ua:AnalogItemType" DataType="ua:Number">
+    <!-- this is a dummy type. Feel free to remove. -->
+  </VariableType>
+  
+  <!-- ### Data Types ###-->
+
+  <!-- ### Method(Types) ###-->
+  <Method SymbolicName="FooZbrFlt:MyMethodType">
+    <InputArguments>
+      <Argument Name="ActionName" DataType="ua:String" ValueRank="Scalar"></Argument>
+      <Argument Name="MethodName" DataType="ua:String" ValueRank="Scalar"></Argument>
+    </InputArguments>
+    <OutputArguments>
+      <Argument Name="Result" DataType="ua:Int32" ValueRank="Scalar"></Argument>
+    </OutputArguments>
+  </Method>
+
+  <!-- ### Objects ###-->
+  <Object SymbolicName="FooZbrFlt:Ape" TypeDefinition="FooZbrFlt:ApeType">
+    <Description>Instance of the APE.</Description>
+    <References>
+      <!-- put this object in the folder "Objects"-->
+      <Reference IsInverse="true">
+        <ReferenceType>ua:Organizes</ReferenceType>
+        <TargetId>ua:ObjectsFolder</TargetId>
+      </Reference>
+    </References>
+  </Object>
+
+</ModelDesign>
