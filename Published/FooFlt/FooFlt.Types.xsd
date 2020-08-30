@@ -1,0 +1,10 @@
+<xs:schema
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.xsd"
+  xmlns:tns="https://new.foo.com/zebra-compression/flattening-and-subspacefolding/UA/"
+  targetNamespace="https://new.foo.com/zebra-compression/flattening-and-subspacefolding/UA/"
+  elementFormDefault="qualified"
+>
+  <xs:import namespace="http://opcfoundation.org/UA/" />
+
+</xs:schema>
