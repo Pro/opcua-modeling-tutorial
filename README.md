@@ -3,6 +3,8 @@
 This repository contains additional files for the OPC UA Modeling Tutorial on
 https://opcua.rocks/from-modelling-to-execution-opc-ua-information-model-tutorial/
 
+An Example Server based on this Model is provided here:
+https://github.com/Pro/opcua-modeling-tutorial-server
 
 ## How to use
 
