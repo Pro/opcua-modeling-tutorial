@@ -1,0 +1,4 @@
+# This folder will hold the output files of Opc.Ua.ModelCompiler.exe
+# ignore evertything in this folder except for this file itself
+*
+!.gitignore
